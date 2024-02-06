@@ -27,6 +27,27 @@ class UserService {
             return err;
         }
     };
+
+    async find(username) {
+        try {
+             // Query untuk mencari akun user berdasarkan username.
+            const user = await this.user_model.findAll({
+                where: {
+                    username: username,
+                }
+            });
+            // Query di atas sama saja dengan:
+            // SELECT * from users WHERE username = 'username';
+
+            return user;
+
+      } catch(err) {
+        // Jika terdapat error, kembalikan nilai error
+        return err;
+      }
+
+
+    }
 };
 
 export default UserService;
