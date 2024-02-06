@@ -19,7 +19,7 @@ export default function Register() {
         e.preventDefault();
 
         // Masukkan data ke server
-        const registerAPI = await fetch("/api/users", {
+        const registerAPI = await fetch("/api/signup", {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -41,13 +41,13 @@ export default function Register() {
 
     return (
        <>
-        <Navbar bg="primary" data-bs-theme="dark">
+        <Navbar className="bg-body-tertiary" >
         <Container>
           <Navbar.Brand href="#home">Cashier App</Navbar.Brand>
           <Nav className="ms-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#features">Products</Nav.Link>
-            <Nav.Link href="#pricing" className="active">Sign Up</Nav.Link>
+            <Nav.Link href="/register" className="active">Sign Up</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

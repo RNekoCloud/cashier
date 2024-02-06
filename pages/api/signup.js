@@ -25,6 +25,15 @@ export default async function POST(req, res) {
         //      user_model: User
         //   }
 
+        /* 
+        * Sebelum kita mendaftarkan user baru,
+        * kita perlu mengecek apakah username sudah terpakai atau belum.
+        * Jika username sudah terdaftar. Maka kembalikan response gagal.
+        * Jika username belum terdaftar, maka insert data ke database.
+     
+        * Cek apakah user sudah terdaftar
+        */
+
         const register = await userService.store({
             username: req.body.username,
             // Bukan req.body.password
