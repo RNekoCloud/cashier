@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import { Container, Nav, Navbar, Button, Form, Alert, Card } from 'react-bootstrap'
 
 export default function Register() {
     const [formUser, setFormUser] = useState({
@@ -14,9 +10,15 @@ export default function Register() {
         role: "",
     });
 
+    const [pesan, setPesan] = useState("");
+
+    // State untuk tampilkan
+    const [tampil, setTampil] = useState(false);
+
     const handleRegister = async(e) => {
         e.preventDefault();
 
+        // Masukkan data ke server
         const registerAPI = await fetch("/api/users", {
             headers: {
                 "Content-Type": "application/json"
@@ -25,23 +27,40 @@ export default function Register() {
             body: JSON.stringify(formUser)
         });
 
-        console.log(registerAPI.json())
+        const result = await registerAPI.json();
+
+        // Update data pesan
+        setPesan(result.message);
+        
+        // Update status tampil dari 'false' ke true
+        // Supaya pesan register tampil
+        setTampil(true);
+
+        console.log(result);
     }
 
     return (
        <>
         <Navbar bg="primary" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-          <Nav className="me-auto">
+          <Navbar.Brand href="#home">Cashier App</Navbar.Brand>
+          <Nav className="ms-auto">
             <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link href="#features">Products</Nav.Link>
+            <Nav.Link href="#pricing" className="active">Sign Up</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
 
-      <Container>
+      <Container className="mt-3">
+        <Card>
+          <Card.Body>
+      {/* Hanya akan tampil, jika nilai dari variable 'tampil' adalah true */}
+        {tampil && 
+          <Alert variant='success'>
+          {pesan}
+          </Alert>
+        }
       <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Username</Form.Label>
@@ -53,7 +72,9 @@ export default function Register() {
         <Form.Control type="password" value={formUser.password} onChange={(e) => setFormUser({...formUser, password: e.target.value})} placeholder="Password" />
       </Form.Group>
       <Form.Group className="mb-3" controlId="formBasicCheckbox">
+      <Form.Label>Tipe Akun</Form.Label>
         <Form.Select aria-label="Default select example" onChange={(e) => setFormUser({...formUser, role: e.target.value})}>
+           
             <option>Pilih Tipe Akun</option>
             <option value="admin">Admin</option>
             <option value="petugas">Petugas</option>
@@ -63,7 +84,8 @@ export default function Register() {
         Submit
       </Button>
     </Form>
-
+    </Card.Body>
+    </Card>
       </Container>
        </>
     )
