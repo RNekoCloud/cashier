@@ -4,7 +4,7 @@ import User from "@/model/user";
 import bcrypt from "bcrypt";
 import UserService from "@/service/UserService";
 
-// POST http://localhost:3000/api/users
+// POST http://localhost:3000/api/signup
 
 export default async function POST(req, res) {
     try {
@@ -19,11 +19,6 @@ export default async function POST(req, res) {
 
         // Initialisasi class instance
         const userService = new UserService(sequelize, User);
-        // const foo = {}
-        // foo = {
-        //     sequelize: Sequelize,
-        //      user_model: User
-        //   }
 
         /* 
         * Sebelum kita mendaftarkan user baru,
@@ -34,6 +29,18 @@ export default async function POST(req, res) {
         * Cek apakah user sudah terdaftar
         */
 
+        const check = await userService.find(req.body.username);
+
+        console.log(`Count:`, check)
+
+        if(check.length != 0) {
+            return res.status(500).json({
+                status: 'fail',
+                message: "User sudah terdaftar"
+            });
+        } 
+
+        // Kalau belum terdaftar, maka boleh sign up / register
         const register = await userService.store({
             username: req.body.username,
             // Bukan req.body.password
@@ -48,6 +55,7 @@ export default async function POST(req, res) {
 
 
         return res.status(201).json({
+            status: 'success',
             message: "Berhasil mendaftarkan user baru",
             result: register,
         })

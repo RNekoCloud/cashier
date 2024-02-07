@@ -19,7 +19,7 @@ class UserService {
             password: data.password,
             role: data.role,
         });
-
+        
             // Kembalikan nilai data dari response.
             return response;
         } catch(err) {
