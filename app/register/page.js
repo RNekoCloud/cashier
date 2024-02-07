@@ -15,6 +15,10 @@ export default function Register() {
     // State untuk tampilkan
     const [tampil, setTampil] = useState(false);
 
+
+    // State warna alert
+    const [warna, setWarna] = useState('');
+
     const handleRegister = async(e) => {
         e.preventDefault();
 
@@ -28,6 +32,13 @@ export default function Register() {
         });
 
         const result = await registerAPI.json();
+
+        // cek status
+        if(result.status == 'success') { 
+          setWarna('success')
+        } else if(result.status == 'fail') {
+          setWarna('danger')
+        }
 
         // Update data pesan
         setPesan(result.message);
@@ -48,6 +59,8 @@ export default function Register() {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="#features">Products</Nav.Link>
             <Nav.Link href="/register" className="active">Sign Up</Nav.Link>
+            <Nav.Link href="/login" >Sign In</Nav.Link>
+
           </Nav>
         </Container>
       </Navbar>
@@ -57,8 +70,8 @@ export default function Register() {
           <Card.Body>
       {/* Hanya akan tampil, jika nilai dari variable 'tampil' adalah true */}
         {tampil && 
-          <Alert variant='success'>
-          {pesan}
+          <Alert variant={warna}>
+            {pesan}
           </Alert>
         }
       <Form>
