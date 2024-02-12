@@ -5,11 +5,7 @@ export default function UserManagement() {
   return (
     <>
       <Sidebar />
-      <Wrapper childrenElement={<>
-        <h2>User Management Page</h2>
-
-        </>} />
-
+    <h2></h2>
     </>
   )
 }

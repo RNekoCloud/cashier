@@ -2,7 +2,7 @@
 
 import Sidebar from "@/components/Sidebar";
 import Wrapper from "@/components/Wrapper";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import { useState } from "react";
 
 
@@ -10,17 +10,14 @@ export default function Products() {
   // State untuk menampilkan Modal Box 
   const [tampilkan, setTampilkan] = useState(false);
 
-  
-  // Handle function button untuk menampilkan button 
-  const handleShow = () => {
+  const handleTampilkanAku = () => {
+    // Benar
     setTampilkan(true)
   }
 
-  // Handle function button untuk menutup modal box 
-  const handleClose = () => {
+  const handleTutupModalBox = () => {
     setTampilkan(false)
   }
-
 
   return (
     <>
@@ -28,24 +25,50 @@ export default function Products() {
       <Wrapper childrenElement={<>
         <div className="ms-3">
           <h2>Product</h2>
-          <Button className="my-2 shadow" onClick={handleShow}>Tambah Product</Button>
+          <Button className="shadow" onClick={handleTampilkanAku}>Tambah Product</Button>
         </div> 
-        
-        <Modal show={tampilkan}>
-            <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+
+         <Modal show={tampilkan} >
+        <Modal.Header >
+          <Modal.Title>Tambah Product</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+            <Form>
+      <Form.Group className="mb-3">
+        <Form.Label>Nama</Form.Label>
+        <Form.Control type="text" placeholder="Nama barang" /> 
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Quantitas</Form.Label>
+        <Form.Control type="text" placeholder="Jumlah barang" />
+      </Form.Group>
+
+      <Form.Group className="mb-3">
+        <Form.Label>Deskripsi</Form.Label>
+        <Form.Control type="text" placeholder="Deskripsi barang" />
+      </Form.Group>
+
+    <Form.Group className="mb-3">
+        <Form.Label>Harga</Form.Label>
+        <Form.Control type="text" placeholder="Harga barang per item" />
+      </Form.Group>
+
+
+
+         </Form> 
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleTutupModalBox}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary"> 
             Save Changes
           </Button>
         </Modal.Footer>
-
-        </Modal>
+      </Modal> 
+       
+       
         </>} /> 
     </>
   );
