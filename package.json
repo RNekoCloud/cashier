@@ -18,5 +18,7 @@
     "react-dom": "^18",
     "sequelize": "^6.36.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
 }
