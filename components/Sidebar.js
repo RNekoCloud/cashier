@@ -32,10 +32,9 @@ export default function Sidebar() {
               <span>User Management</span>
             </Link>
             <Link
-              href="/settings"
+              href="/setting"
               className={`list-group-item list-group-item-action py-2 ripple 
-                        ${router === "/settings"}
-                          ? "active": ""
+                        ${router === "/setting" ? "active" : ""}
                           `}
             >
               <i className="fas fa-chart-line fa-fw me-3"></i>
