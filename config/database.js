@@ -13,7 +13,7 @@ const sequelize = new Sequelize(
         dialect: "mysql",
         // Xampp
         // host: "localhost"
-        host: "172.17.0.3",
+        host: "172.17.0.2",
     }
 )
 
