@@ -1,10 +1,10 @@
 "use client";
 
 import  Link  from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function Sidebar() {
-    const router = useRouter();
+    const router = usePathname(); 
 
     return (
         <header>
@@ -12,13 +12,17 @@ export default function Sidebar() {
                 <div className="position-sticky">
                     <div className="list-group list-group-flush mx-3 mt-4">
                         <Link
-                        href="/"
-                        className={"list-group-item list-group-item-action py-2 ripple me-3"}
+                        href="/products"
+                        className={`list-group-item list-group-item-action py-2 ripple me-3 
+                          ${router === "/products"
+                          ? "active" : ""
+                          }
+                          `}
                         aria-current="true"
                         >
-                        <i className="fas fa-chart-pie fa-fw me-3 "></i><span>Product</span>
+                        <i className="fas fa-chart-pie fa-fw me-3 "></i><span>Products</span>
                         </Link>
-                        <Link href="/" className="list-group-item list-group-item-action py-2 ripple">
+                        <Link href="/" className="list-group-item   list-group-item-action py-2 ripple">
                         <i className="fas fa-chart-area fa-fw me-3"></i><span>User Management</span>
                         </Link> 
                         <a href="#" className="list-group-item list-group-item-action py-2 ripple"
