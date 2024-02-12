@@ -17,7 +17,7 @@ const Product = sequelize.define("product", {
   },
   description: {
     type: DataTypes.STRING,
-  }
+  },
 });
 
 export default Product;
